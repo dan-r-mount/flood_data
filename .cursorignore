@@ -1,0 +1,6 @@
+# Add directories or file patterns to ignore during indexing (e.g. foo/ or *.csv)
+flood_env/
+flood_datasets/
+flood_datasets/reservoir_extents/
+flood_datasets/reservoir_extents/example_api.json
+flood_datasets/reservoir_extents/example_api.json
