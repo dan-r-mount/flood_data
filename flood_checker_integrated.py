@@ -269,8 +269,8 @@ class IntegratedFloodRiskChecker:
             else:
                 assessment['surface_water'] = {
                     'risk_level': 'VERY LOW',
-                    'yearly_chance_current': 'Less than 1 in 1000 (0.1%)',
-                    'yearly_chance_2040s': 'Less than 1 in 1000 (0.1%) - may increase slightly',
+                    'yearly_chance_current': 'Less than 0.1% chance in any given year (1 in 1,000)',
+                    'yearly_chance_2040s': 'Less than 0.1% chance in any given year (1 in 1,000) - may increase slightly due to climate change',
                     'closest_distance': None,
                     'areas_count': 0
                 }
@@ -289,8 +289,8 @@ class IntegratedFloodRiskChecker:
             else:
                 assessment['rivers_and_sea'] = {
                     'risk_level': 'VERY LOW',
-                    'yearly_chance_current': 'Less than 1 in 1000 (0.1%)',
-                    'yearly_chance_2040s': 'Less than 1 in 1000 (0.1%) - may increase slightly',
+                    'yearly_chance_current': 'Less than 0.1% chance in any given year (1 in 1,000)',
+                    'yearly_chance_2040s': 'Less than 0.1% chance in any given year (1 in 1,000) - may increase slightly due to climate change',
                     'closest_distance': None,
                     'areas_count': 0
                 }
@@ -316,21 +316,26 @@ class IntegratedFloodRiskChecker:
             return "VERY LOW"
     
     def _get_yearly_chance_estimate(self, risk_level: str) -> str:
-        """Estimate yearly flooding chance based on risk level."""
+        """
+        Estimate yearly flooding chance based on Environment Agency RoFRS categories.
+        Following the official data.gov.uk probabilistic model:
+        https://environment.data.gov.uk/dataset/96ab4342-82c1-4095-87f1-0082e8d84ef1
+        """
+        # Official Environment Agency Risk of Flooding from Rivers and Sea (RoFRS) categories
         risk_mapping = {
-            'HIGH': 'Greater than 1 in 30 (3.3%)',
-            'MEDIUM': 'Between 1 in 100 and 1 in 30 (1% to 3.3%)',
-            'LOW': 'Between 1 in 1000 and 1 in 100 (0.1% to 1%)',
-            'VERY LOW': 'Less than 1 in 1000 (0.1%)'
+            'HIGH': 'Greater than or equal to 3.3% chance in any given year (1 in 30)',
+            'MEDIUM': 'Less than 3.3% (1 in 30) but greater than or equal to 1% (1 in 100) chance in any given year',
+            'LOW': 'Less than 1% (1 in 100) but greater than or equal to 0.1% (1 in 1,000) chance in any given year',
+            'VERY LOW': 'Less than 0.1% chance in any given year (1 in 1,000)'
         }
         return risk_mapping.get(risk_level, 'Unknown')
     
     def _project_future_risk(self, current_risk: str) -> str:
-        """Project future flood risk with climate change."""
-        if 'Greater than 1 in 30' in current_risk:
-            return 'Greater than 1 in 30 (3.3%) - increasing trend expected'
-        elif 'Between 1 in 100 and 1 in 30' in current_risk:
-            return 'Between 1 in 75 and 1 in 30 (1.3% to 3.3%) - higher due to climate change'
+        """Project future flood risk with climate change, following RoFRS methodology."""
+        if 'Greater than or equal to 3.3%' in current_risk:
+            return 'Greater than or equal to 3.3% chance in any given year (1 in 30) - increasing trend expected due to climate change'
+        elif 'Less than 3.3% (1 in 30) but greater than or equal to 1%' in current_risk:
+            return 'Less than 3.3% (1 in 30) but greater than or equal to 1.3% (1 in 75) chance in any given year - higher due to climate change'
         else:
             return current_risk + ' - may increase slightly due to climate change'
     

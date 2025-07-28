@@ -8,7 +8,7 @@ This guide helps you set up the large dataset files needed for the flood risk as
 **Size**: ~14MB  
 **Status**: ✅ Required for basic functionality
 
-**Google Drive Link**: [Download FRA Dataset](https://drive.google.com/drive/folders/YOUR_FOLDER_ID)
+**Google Drive Link**: [Download FRA Dataset](https://drive.google.com/drive/folders/1SMldMWv6_s7J6p_up8iFxWOtWa2YlDro)
 
 **Files to Download**:
 ```
@@ -34,7 +34,7 @@ These will improve accuracy when available:
 - **Setup**: Extract to `flood_datasets/surface_water/`
 
 **Rivers/Sea Data**  
-- **Status**: DEFRA request submitted - pending access
+- **Status**: DEFRA request submitted DSP3-7259 opened on 28/07 - pending access
 - **Setup**: Will extract to `flood_datasets/rivers_sea/` when available
 
 ## 🔧 Verification

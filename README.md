@@ -1,11 +1,11 @@
 # UK Flood Risk Assessment Tool
 
-A comprehensive CLI tool for assessing flood risk at UK postcodes, designed to replicate functionality similar to the [official government service](https://check-long-term-flood-risk.service.gov.uk/risk#).
+CLI tool for assessing flood risk at UK postcodes, functionality similar to the [official government service](https://check-long-term-flood-risk.service.gov.uk/risk#).
 
 ## 🎯 What This Tool Does
 
-- **Distance calculations** to nearest flood risk areas (unique feature not in gov.uk service)
-- **Risk categorization** using government-style Very Low/Low/Medium/High categories  
+- **Distance calculations** to nearest flood risk areas similar to [this website](https://nafra.azurewebsites.net/)
+- **Risk categorization** following the official [Environment Agency RoFRS probabilistic model](https://environment.data.gov.uk/dataset/96ab4342-82c1-4095-87f1-0082e8d84ef1)  
 - **Multiple flood types**: Surface Water, Rivers & Sea, Reservoirs, Groundwater
 - **Live data integration** from Environment Agency APIs
 - **Future risk projections** with climate change considerations
@@ -14,8 +14,6 @@ A comprehensive CLI tool for assessing flood risk at UK postcodes, designed to r
 
 ### Prerequisites
 - Python 3.7+
-- ~20MB disk space (datasets hosted separately)
-- Internet connection for postcode lookup and reservoir API
 
 ### Setup
 ```bash
@@ -67,7 +65,7 @@ Coordinates: 533416, 181746 (BNG)
 | **Rivers & Sea** | ✅ Working | FRA Approximation | England-wide significant areas |  
 | **Reservoirs** | ✅ Working | Live EA API | Major reservoirs |
 | **Distance Calculations** | ✅ Working | Spatial Analysis | All flood sources |
-| **Risk Scoring** | ✅ Working | Government Categories | 4-band system |
+| **Risk Scoring** | ✅ Working | [Official RoFRS Categories](https://environment.data.gov.uk/dataset/96ab4342-82c1-4095-87f1-0082e8d84ef1) | 4-band probabilistic system |
 
 ### 🔄 Enhanced Versions Available (Pending Data)
 | Component | Enhancement | Status | Impact |
@@ -131,6 +129,17 @@ Due to GitHub size limitations, the main FRA shapefile (~14MB) is hosted separat
 1. Download all files from Google Drive
 2. Place in the same directory as `flood_checker_integrated.py`
 3. The tool will automatically detect and load the data
+
+## 📊 Risk Categories
+
+This tool uses the official Environment Agency [Risk of Flooding from Rivers and Sea (RoFRS)](https://environment.data.gov.uk/dataset/96ab4342-82c1-4095-87f1-0082e8d84ef1) probabilistic risk categories:
+
+- **High** - Greater than or equal to 3.3% chance in any given year (1 in 30)
+- **Medium** - Less than 3.3% (1 in 30) but greater than or equal to 1% (1 in 100) chance in any given year  
+- **Low** - Less than 1% (1 in 100) but greater than or equal to 0.1% (1 in 1,000) chance in any given year
+- **Very Low** - Less than 0.1% chance in any given year (1 in 1,000)
+
+These categories align exactly with the data.gov.uk model used in the official government flood risk service.
 
 ## 🔧 Technical Details
 
