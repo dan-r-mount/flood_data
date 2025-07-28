@@ -349,6 +349,9 @@ class IntegratedFloodRiskChecker:
         print(f"Location: {location}")
         print(f"Coordinates: {assessment['coordinates'][0]:.0f}, {assessment['coordinates'][1]:.0f} (BNG)")
         print("=" * 80)
+        print("📋 Data Note: Surface Water & Rivers/Sea use FRA approximation (area-level screening)")
+        print("   For property-level precision, enhanced datasets are needed (see README)")
+        print("=" * 80)
         
         # Surface Water Risk
         sw = assessment['surface_water']
@@ -362,6 +365,7 @@ class IntegratedFloodRiskChecker:
                 else:
                     print(f"   Distance to nearest area: {sw['closest_distance']:.0f} meters")
             print(f"   Areas identified: {sw['areas_count']}")
+            print(f"   ⚠️  Data source: FRA approximation (large area screening, not 50m precision)")
         else:
             print(f"   Note: {sw.get('note', 'No additional information')}")
         
@@ -377,6 +381,7 @@ class IntegratedFloodRiskChecker:
                 else:
                     print(f"   Distance to nearest area: {rs['closest_distance']:.0f} meters")
             print(f"   Areas identified: {rs['areas_count']}")
+            print(f"   ⚠️  Data source: FRA approximation (awaiting DEFRA access for detailed RoFRS data)")
         else:
             print(f"   Note: {rs.get('note', 'No additional information')}")
         

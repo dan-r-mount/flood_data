@@ -1,8 +1,8 @@
 # Dataset Setup Guide
 
-This guide helps you set up the large dataset files needed for the flood risk assessment tool.
+This guide helps you set up the large dataset files needed for the flood risk assessment tool. Some datasets have been requested from DEFRA, placeholder folders have been created. 
 
-## 📥 Required Data Files
+## Required Data Files
 
 ### 1. Flood Risk Areas (FRA) Shapefile
 **Size**: ~14MB  
@@ -22,22 +22,25 @@ Flood_Risk_AreasPolygon.cst    # Character set
 **Installation**:
 1. Download all 5 files from Google Drive
 2. Place them in the same directory as `flood_checker_integrated.py`
-3. Verify setup by running: `python flood_checker_integrated.py --postcode "E1 6AN"`
+3. Verify setup by running: `python flood_checker_integrated.py --postcode "SW2 4BN"`
 
-### 2. Enhanced Datasets (Optional)
+### 2. Enhanced Datasets 
 
 These will improve accuracy when available:
 
-**Surface Water Grids**
-- **Status**: Available for download
-- **Source**: [Environment Agency Surface Water Data](https://www.data.gov.uk/dataset/bad20199-6d39-4aad-8564-26a46778fd94)
-- **Setup**: Extract to `flood_datasets/surface_water/`
-
 **Rivers/Sea Data**  
 - **Status**: DEFRA request submitted DSP3-7259 opened on 28/07 - pending access
-- **Setup**: Will extract to `flood_datasets/rivers_sea/` when available
 
-## 🔧 Verification
+**Rivers/Sea Data Climate Change**
+
+- **Status**: DEFRA request submitted DSP3-7260 opened on 28/07 - pending access
+
+**Surface Water Grids**
+- **Status**: Included within DSP3-7259 request above
+
+
+
+## Verification
 
 After setup, run this test:
 
@@ -54,7 +57,7 @@ Loading flood risk data sources...
 
 If you see "❌ Error loading FRA data", check that all 5 files are in the correct location.
 
-## 📊 File Structure
+## File Structure
 
 Your directory should look like:
 ```
@@ -73,19 +76,8 @@ flood_data/
     └── rivers_sea/
 ```
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
-**"Error loading FRA data"**
-- Ensure all 5 shapefile components are present
-- Check file permissions (should be readable)
-- Verify files aren't corrupted by checking file sizes
-
-**Large file warnings in Git**
+**Large file available in google drive*
 - The .gitignore is set up to exclude these files
 - They should only be stored on Google Drive
-- Never commit .shp files to GitHub
-
-**Performance issues**  
-- FRA shapefile is 14MB - normal load time is 1-2 seconds
-- If consistently slow, check available memory
-- Consider closing other applications during assessment 

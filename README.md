@@ -59,20 +59,44 @@ Coordinates: 533416, 181746 (BNG)
 ## 📊 Current Implementation Status
 
 ### ✅ Fully Working
-| Component | Status | Data Source | Coverage |
-|-----------|--------|-------------|----------|
-| **Surface Water** | ✅ Working | FRA Approximation | England-wide significant areas |
-| **Rivers & Sea** | ✅ Working | FRA Approximation | England-wide significant areas |  
-| **Reservoirs** | ✅ Working | Live EA API | Major reservoirs |
-| **Distance Calculations** | ✅ Working | Spatial Analysis | All flood sources |
-| **Risk Scoring** | ✅ Working | [Official RoFRS Categories](https://environment.data.gov.uk/dataset/96ab4342-82c1-4095-87f1-0082e8d84ef1) | 4-band probabilistic system |
+| Component | Status | Data Source | Resolution/Granularity | Accuracy Level |
+|-----------|--------|-------------|----------------------|----------------|
+| **Surface Water** | ✅ Working | FRA Approximation | Large polygon areas (189 total) | **Good for general screening** - identifies areas with known surface water risk, but lacks 50m precision |
+| **Rivers & Sea** | ✅ Working | FRA Approximation | Large polygon areas (189 total) | **Good approximation** - covers significant flood risk areas |  
+| **Reservoirs** | ✅ Working | Live EA API | Individual reservoir extents | **Highly accurate** - live official data |
+| **Distance Calculations** | ✅ Working | Spatial Analysis | Meter-level precision | **Highly accurate** - unique feature not in gov.uk |
+| **Risk Scoring** | ✅ Working | [Official RoFRS Categories](https://environment.data.gov.uk/dataset/96ab4342-82c1-4095-87f1-0082e8d84ef1) | 4-band probabilistic system | **Officially compliant** - exact government categories |
 
 ### 🔄 Enhanced Versions Available (Pending Data)
-| Component | Enhancement | Status | Impact |
-|-----------|-------------|---------|---------|
-| **Surface Water** | 50m probability grids | Needs EA dataset | More precise risk scoring |
-| **Rivers & Sea** | Detailed flood modeling | DEFRA request submitted | Higher accuracy assessment |
-| **Groundwater** | BGS geological data | Requires license | Complete risk picture |
+| Component | Current Resolution | Enhanced Dataset | Enhanced Resolution | Accuracy Improvement |
+|-----------|-------------------|------------------|-------------------|-------------------|
+| **Surface Water** | Large FRA polygons | [RoFSW 50m grids](https://www.data.gov.uk/dataset/bad20199-6d39-4aad-8564-26a46778fd94) | 50m x 50m cells | **Major improvement** - property-level precision vs area-level screening |
+| **Rivers & Sea** | Large FRA polygons | RoFRS detailed modeling | 50m x 50m cells with defenses | **Significant improvement** - includes flood defense modeling |
+| **Groundwater** | Not available | BGS geological data | Site-specific | **Complete new capability** - currently missing |
+
+## 📊 Data Accuracy & Limitations
+
+### Current Surface Water Assessment
+**⚠️ Important for Colleagues**: The surface water flood risk is currently based on **Flood Risk Areas (FRA) approximation**, not the official 50m precision surface water maps.
+
+| What This Means | Current Implementation | Official Gov.UK Service |
+|------------------|----------------------|----------------------|
+| **Data Source** | FRA polygons tagged as "Surface Water" | Risk of Flooding from Surface Water (RoFSW) 50m grids |
+| **Spatial Resolution** | Large areas (e.g., "London, Thames" covers many postcodes) | 50m x 50m individual cells |
+| **Risk Assessment** | Distance-based approximation | Actual flood modeling probability |
+| **Use Case** | ✅ **Good for area screening** - "Is this location in a known surface water risk area?" | ✅ **Property-level precision** - exact risk at specific address |
+| **Accuracy** | **Approximate** - may over/under-estimate for specific properties | **High precision** - based on detailed modeling |
+
+### When Current Data Works Well
+- ✅ Identifying areas with **known surface water flood risk**
+- ✅ **General planning** and area-level risk screening  
+- ✅ Understanding **relative risk** between different locations
+- ✅ **Distance calculations** to flood risk boundaries (unique feature)
+
+### When Enhanced Data Is Needed
+- ❌ Property-level flood risk assessment
+- ❌ Insurance or planning applications requiring precise risk data
+- ❌ Detailed flood risk modeling for specific developments
 
 ## 📁 Datasets
 
