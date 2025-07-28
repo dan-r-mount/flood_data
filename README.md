@@ -270,6 +270,6 @@ Tests various postcodes:
 
 ---
 
-**Last Updated**: January 2025  
+**Last Updated**: July 2025  
 **Version**: 1.0.0  
 **Status**: Production ready with enhancement pipeline 
